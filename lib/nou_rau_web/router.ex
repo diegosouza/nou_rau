@@ -21,9 +21,14 @@ defmodule NouRauWeb.Router do
     live "/documents", DocumentLive.Index, :index
     live "/documents/new", DocumentLive.Index, :new
     live "/documents/:id/edit", DocumentLive.Index, :edit
-
     live "/documents/:id", DocumentLive.Show, :show
     live "/documents/:id/show/edit", DocumentLive.Show, :edit
+
+    live "/categories", CategoryLive.Index, :index
+    live "/categories/new", CategoryLive.Index, :new
+    live "/categories/:id/edit", CategoryLive.Index, :edit
+    live "/categories/:id", CategoryLive.Show, :show
+    live "/categories/:id/show/edit", CategoryLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
