@@ -21,6 +21,16 @@
     <%= @category.description %>
   </li>
 
+  <li>
+    <strong>Inserted at:</strong>
+    <%= @category.inserted_at %>
+  </li>
+
+  <li>
+    <strong>Updated at:</strong>
+    <%= @category.updated_at %>
+  </li>
+
 </ul>
 
 <span><%= live_patch "Edit", to: Routes.category_show_path(@socket, :edit, @category), class: "button" %></span>

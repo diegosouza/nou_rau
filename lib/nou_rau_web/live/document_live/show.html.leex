@@ -21,6 +21,16 @@
     <%= @document.description %>
   </li>
 
+  <li>
+    <strong>Inserted at:</strong>
+    <%= @document.inserted_at %>
+  </li>
+
+  <li>
+    <strong>Updated at:</strong>
+    <%= @document.updated_at %>
+  </li>
+
 </ul>
 
 <span><%= live_patch "Edit", to: Routes.document_show_path(@socket, :edit, @document), class: "button" %></span>
