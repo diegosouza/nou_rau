@@ -1,9 +1,18 @@
 defmodule NouRauWeb.PageLive do
   use NouRauWeb, :live_view
+  alias NouRau.Collections
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{})}
+    assigns = assign(socket,
+      query: "",
+      results: %{},
+      main_categories: main_categories(),
+      # TODO: to adjust when downloads counter available
+      most_downloaded_documents: most_downloaded_documents()
+    )
+
+    {:ok, assigns}
   end
 
   @impl true
@@ -35,5 +44,13 @@ defmodule NouRauWeb.PageLive do
         String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
         into: %{},
         do: {app, vsn}
+  end
+
+  defp main_categories do
+    Collections.list_categories() |> Enum.take(5)
+  end
+
+  defp most_downloaded_documents do
+    Collections.list_documents() |> Enum.take(10)
   end
 end

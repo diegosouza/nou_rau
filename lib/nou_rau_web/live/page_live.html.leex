@@ -16,33 +16,25 @@
 <section class="row">
   <article class="column">
     <h2>Main categories</h2>
-    <dl>
-      <dt><a href="#">Category One</a></dt>
-      <dd>The description for category one</dd>
-      <dt><a href="#">Category Two</a></dt>
-      <dd>The description for category two</dd>
-      <dt><a href="#">Category Three</a></dt>
-      <dd>The description for category three</dd>
-    </dl>
+    <%= if @main_categories do %>
+      <dl>
+        <%= for category <- @main_categories do %>
+          <dt><%= live_redirect category.name, to: Routes.category_show_path(@socket, :show, category) %></dt>
+          <dd><%= category.description || "(no description)" %></dd>
+        <% end %>
+      </dl>
+    <% else %>
+      <p>No categories available</p>
+    <% end %>
   </article>
   <article class="column">
     <h2>Most downloaded documents</h2>
-    <ol>
-      <li>
-        <a href="#">Document 1</a>
-      </li>
-      <li>
-        <a href="#">Document 2</a>
-      </li>
-      <li>
-        <a href="#">Document 3</a>
-      </li>
-      <li>
-        <a href="#">Document 4</a>
-      </li>
-      <li>
-        <a href="#">Document 5</a>
-      </li>
-    </ol>
+    <%= if @most_downloaded_documents do %>
+      <ol>
+        <%= for document <- @most_downloaded_documents do %>
+          <li><%= live_redirect document.name, to: Routes.document_show_path(@socket, :show, document) %></li>
+        <% end %>
+      </ol>
+    <% end %>
   </article>
 </section>
