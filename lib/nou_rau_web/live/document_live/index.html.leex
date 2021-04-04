@@ -12,7 +12,7 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Name</th>
       <th>Description</th>
 
       <th></th>
@@ -21,7 +21,7 @@
   <tbody id="documents">
     <%= for document <- @documents do %>
       <tr id="document-<%= document.id %>">
-        <td><%= document.title %></td>
+        <td><%= document.name %></td>
         <td><%= document.description %></td>
 
         <td>

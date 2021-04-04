@@ -3,8 +3,8 @@ defmodule NouRau.Repo.Migrations.CreateDocuments do
 
   def change do
     create table(:documents) do
-      add :title, :string, null: false
-      add :description, :string, null: false
+      add :name, :string, null: false
+      add :description, :string, null: true
 
       timestamps()
     end

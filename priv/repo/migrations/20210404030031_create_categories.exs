@@ -4,7 +4,7 @@ defmodule NouRau.Repo.Migrations.CreateCategories do
   def change do
     create table(:categories) do
       add :name, :string, null: false
-      add :description, :string, null: false
+      add :description, :string, null: true
 
       timestamps()
     end
