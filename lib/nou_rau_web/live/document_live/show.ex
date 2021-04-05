@@ -5,6 +5,7 @@ defmodule NouRauWeb.DocumentLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
+    socket = assign(socket, categories: Collections.list_categories())
     {:ok, socket}
   end
 

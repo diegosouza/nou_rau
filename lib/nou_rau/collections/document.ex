@@ -15,7 +15,7 @@ defmodule NouRau.Collections.Document do
   @doc false
   def changeset(document, attrs) do
     document
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :description, :category_id])
     |> validate_required([:name])
     |> cast_assoc(:category)
   end

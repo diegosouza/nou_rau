@@ -14,5 +14,12 @@
   <%= text_input f, :description %>
   <%= error_tag f, :description %>
 
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+  <%= label f, :category_id %>
+  <%= select f, :category_id, Enum.map(@categories, &{&1.name, &1.id}) %>
+  <%= error_tag f, :category_id %>
+
+  <div>
+    <%= submit "Save", phx_disable_with: "Saving..." %>
+  </div>
+
 </form>

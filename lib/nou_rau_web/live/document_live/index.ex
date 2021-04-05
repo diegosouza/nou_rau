@@ -6,7 +6,12 @@ defmodule NouRauWeb.DocumentLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :documents, list_documents())}
+    socket = assign(
+      socket,
+      documents: Collections.list_documents(),
+      categories: Collections.list_categories()
+    )
+    {:ok, socket}
   end
 
   @impl true
