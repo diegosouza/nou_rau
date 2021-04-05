@@ -18,7 +18,12 @@
 
   <li>
     <strong>Description:</strong>
-    <%= @document.description %>
+    <%= @document.description || "(no description)" %>
+  </li>
+
+  <li>
+      <strong>Category:</strong>
+      <%= @document.category.name %>
   </li>
 
   <li>
