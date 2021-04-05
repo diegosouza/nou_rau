@@ -18,7 +18,7 @@ defmodule NouRau.Collections do
 
   """
   def list_documents do
-    Repo.all(Document)
+    Repo.all from Document, preload: :category
   end
 
   @doc """

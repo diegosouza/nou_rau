@@ -9,5 +9,9 @@ defmodule NouRau.Repo.Migrations.CreateCategories do
       timestamps()
     end
 
+    now = NaiveDateTime.utc_now() |> NaiveDateTime.to_string()
+
+    execute "INSERT INTO categories (name, description, inserted_at, updated_at) VALUES ('Uncategorized', 'Groups uncategorized documents', '#{now}', '#{now}')"
+
   end
 end

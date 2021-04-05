@@ -14,6 +14,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Category</th>
 
       <th></th>
     </tr>
@@ -23,6 +24,7 @@
       <tr id="document-<%= document.id %>">
         <td><%= document.name %></td>
         <td><%= document.description %></td>
+        <td><%= live_redirect document.category.name, to: Routes.category_show_path(@socket, :show, document.category) %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.document_show_path(@socket, :show, document) %></span>

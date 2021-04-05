@@ -13,7 +13,7 @@
 alias NouRau.Collections.{Category,Document}
 alias NouRau.Repo
 
-%Document{ name: "Document without description" } |> Repo.insert!
+%Document{ name: "Document without description uncategorized" } |> Repo.insert!
 %Category{ name: "Category without description" } |> Repo.insert!
 
 for n <- 1..20 do
