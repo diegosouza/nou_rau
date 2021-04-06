@@ -6,6 +6,7 @@ defmodule NouRau.Collections.Document do
   schema "documents" do
     field :description, :string
     field :name, :string
+    field :file, :string
 
     belongs_to :category, Category
 
@@ -15,7 +16,7 @@ defmodule NouRau.Collections.Document do
   @doc false
   def changeset(document, attrs) do
     document
-    |> cast(attrs, [:name, :description, :category_id])
+    |> cast(attrs, [:name, :description, :category_id, :file])
     |> validate_required([:name])
     |> cast_assoc(:category)
   end

@@ -55,6 +55,19 @@ defmodule NouRau.Collections do
     |> Repo.insert()
   end
 
+  def create_document_from(document, attrs \\ %{}, callback \\ &{:ok, &1}) do
+    document
+    |> Document.changeset(attrs)
+    |> Repo.insert()
+    |> after_save(callback)
+  end
+
+  defp after_save({:ok, document}, callback) do
+    {:ok, _} = callback.(document)
+  end
+
+  defp after_save(error, _callback), do: error
+
   @doc """
   Updates a document.
 
@@ -67,10 +80,11 @@ defmodule NouRau.Collections do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_document(%Document{} = document, attrs) do
+  def update_document(%Document{} = document, attrs, callback \\ &{:ok, &1}) do
     document
     |> Document.changeset(attrs)
     |> Repo.update()
+    |> after_save(callback)
   end
 
   @doc """

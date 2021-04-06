@@ -4,6 +4,7 @@ defmodule NouRau.Application do
   @moduledoc false
 
   use Application
+  alias NouRau.Collections.Upload
 
   def start(_type, _args) do
     children = [
@@ -18,6 +19,8 @@ defmodule NouRau.Application do
       # Start a worker by calling: NouRau.Worker.start_link(arg)
       # {NouRau.Worker, arg}
     ]
+
+    Upload.dir() |> File.mkdir!
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

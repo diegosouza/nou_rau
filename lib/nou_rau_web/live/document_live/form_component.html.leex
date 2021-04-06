@@ -19,6 +19,23 @@
   <%= error_tag f, :category_id %>
 
   <div>
+    <%= label f, :file %>
+    <%= live_file_input @uploads.file %>
+
+    <%= for file <- @uploads.file.entries do %>
+      <span class="column">
+          <progress max="100" value="<%= file.progress %>" />
+      </span>
+    <% end %>
+
+    <%= for {_ref, msg} <- @uploads.file.errors do %>
+      <p class="alert alert-danger">
+          <%= Phoenix.Naming.humanize(msg) %>
+      </p>
+    <% end %>
+  </div>
+
+  <div>
     <%= submit "Save", phx_disable_with: "Saving..." %>
   </div>
 
