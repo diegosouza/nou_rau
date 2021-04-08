@@ -20,7 +20,8 @@ defmodule NouRau.Application do
       # {NouRau.Worker, arg}
     ]
 
-    Upload.dir() |> File.mkdir!
+    uploads = Upload.dir()
+    File.dir?(uploads) || File.mkdir!(uploads)
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
