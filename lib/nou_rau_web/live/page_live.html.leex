@@ -15,10 +15,10 @@
 
 <section class="row">
   <article class="column">
-    <h2>Main categories</h2>
-    <%= if @main_categories do %>
+    <h2>Root categories</h2>
+    <%= if @root_categories do %>
       <dl>
-        <%= for category <- @main_categories do %>
+        <%= for category <- @root_categories do %>
           <dt><%= live_redirect category.name, to: Routes.category_show_path(@socket, :show, category) %></dt>
           <dd><%= category.description || "(no description)" %></dd>
         <% end %>

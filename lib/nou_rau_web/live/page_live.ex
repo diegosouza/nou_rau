@@ -7,7 +7,7 @@ defmodule NouRauWeb.PageLive do
     assigns = assign(socket,
       query: "",
       results: %{},
-      main_categories: main_categories(),
+      root_categories: Collections.root_categories(),
       # TODO: to adjust when downloads counter available
       most_downloaded_documents: most_downloaded_documents()
     )
@@ -44,10 +44,6 @@ defmodule NouRauWeb.PageLive do
         String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
         into: %{},
         do: {app, vsn}
-  end
-
-  defp main_categories do
-    Collections.list_categories() |> Enum.take(5)
   end
 
   defp most_downloaded_documents do

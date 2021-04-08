@@ -118,6 +118,8 @@ defmodule NouRau.Collections do
 
   alias NouRau.Collections.Category
 
+  def root_categories, do: Category.roots() |> Repo.all()
+
   @doc """
   Returns the list of categories.
 
@@ -129,6 +131,18 @@ defmodule NouRau.Collections do
   """
   def list_categories do
     Repo.all(Category)
+  end
+
+  def list_categories_for_another() do
+    all = Repo.all from(Category), preload: [:parent]
+    [ %Category{ id: "", name: "Without parent category (root)" } | all ]
+    |> Enum.reject(& &1.name == "Uncategorized" )
+  end
+
+  def list_categories_with_subcategories_count do
+    # TODO: get categories with subcategories_count set
+    from(Category)
+    |> Repo.all()
   end
 
   @doc """

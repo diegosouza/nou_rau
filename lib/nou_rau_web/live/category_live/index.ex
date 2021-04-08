@@ -6,7 +6,8 @@ defmodule NouRauWeb.CategoryLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :categories, list_categories())}
+    socket = assign(socket, :categories, [])
+    {:ok, socket}
   end
 
   @impl true
@@ -17,6 +18,7 @@ defmodule NouRauWeb.CategoryLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Category")
+    |> assign(:categories, Collections.list_categories_for_another())
     |> assign(:category, Collections.get_category!(id))
   end
 
@@ -29,6 +31,7 @@ defmodule NouRauWeb.CategoryLive.Index do
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Categories")
+    |> assign(:categories, Collections.list_categories_with_subcategories_count())
     |> assign(:category, nil)
   end
 

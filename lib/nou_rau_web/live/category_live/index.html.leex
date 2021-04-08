@@ -6,6 +6,7 @@
     title: @page_title,
     action: @live_action,
     category: @category,
+    categories: @categories,
     return_to: Routes.category_index_path(@socket, :index) %>
 <% end %>
 
@@ -14,6 +15,8 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Root?</th>
+      <th>Subcategories</th>
 
       <th></th>
     </tr>
@@ -23,6 +26,8 @@
       <tr id="category-<%= category.id %>">
         <td><%= category.name %></td>
         <td><%= category.description %></td>
+        <td><%= if is_nil(category.parent_id) do %>✓<% end %></td>
+        <td><%= category.subcategories_count %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.category_show_path(@socket, :show, category) %></span>
