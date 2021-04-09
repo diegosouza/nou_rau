@@ -2,6 +2,10 @@ defmodule NouRau.Collections.Upload do
 
   @default_dir "priv/static/uploads"
 
+  def get_file(filename) do
+    "#{@default_dir}/#{filename}"
+  end
+
   def filename(entry), do: "#{entry.uuid}.#{ext(entry)}"
 
   def new_entry(meta, entry) do

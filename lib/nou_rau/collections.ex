@@ -35,7 +35,7 @@ defmodule NouRau.Collections do
       ** (Ecto.NoResultsError)
 
   """
-  def get_document!(id), do: Repo.get!(Document, id) |> Repo.preload(:category)
+  def get_document!(id), do: Repo.get!(Document, id) |> Repo.preload([:category, :attachment])
 
   @doc """
   Creates a document.

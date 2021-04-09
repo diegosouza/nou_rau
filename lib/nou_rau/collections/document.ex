@@ -1,14 +1,14 @@
 defmodule NouRau.Collections.Document do
   use Ecto.Schema
   import Ecto.Changeset
-  alias NouRau.Collections.Category
+  alias NouRau.Collections.{Attachment, Category}
 
   schema "documents" do
     field :description, :string
     field :name, :string
-    field :file, :string
 
     belongs_to :category, Category
+    has_one :attachment, Attachment
 
     timestamps()
   end
@@ -16,8 +16,9 @@ defmodule NouRau.Collections.Document do
   @doc false
   def changeset(document, attrs) do
     document
-    |> cast(attrs, [:name, :description, :category_id, :file])
+    |> cast(attrs, [:name, :description, :category_id])
     |> validate_required([:name])
     |> cast_assoc(:category)
+    |> cast_assoc(:attachment)
   end
 end

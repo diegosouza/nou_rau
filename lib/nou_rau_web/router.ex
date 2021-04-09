@@ -23,6 +23,7 @@ defmodule NouRauWeb.Router do
     live "/documents/:id/edit", DocumentLive.Index, :edit
     live "/documents/:id", DocumentLive.Show, :show
     live "/documents/:id/show/edit", DocumentLive.Show, :edit
+    get "/documents/:id/download", DocumentController, :download
 
     live "/categories", CategoryLive.Index, :index
     live "/categories/new", CategoryLive.Index, :new

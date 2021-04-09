@@ -2,7 +2,7 @@ defmodule NouRauWeb.DocumentLive.FormComponent do
   use NouRauWeb, :live_component
 
   alias NouRau.Collections
-  alias NouRau.Collections.{Document,Upload}
+  alias NouRau.Collections.{Attachment, Document, Upload}
 
   @impl true
   def update(%{document: document} = assigns, socket) do
@@ -12,7 +12,7 @@ defmodule NouRauWeb.DocumentLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)
-     |> allow_upload(:file, accept: Upload.allowed_extensions())}
+     |> allow_upload(:attachment, accept: Upload.allowed_extensions())}
   end
 
   @impl true
@@ -32,7 +32,7 @@ defmodule NouRauWeb.DocumentLive.FormComponent do
   defp save_document(socket, :edit, document_params) do
     document = put_document_file(socket, socket.assigns.document)
 
-    case Collections.update_document(document, document_params, &consume_files(socket, &1)) do
+    case Collections.update_document(document, document_params, &consume_attachments(socket, &1)) do
       {:ok, _document} ->
         {:noreply,
          socket
@@ -47,7 +47,7 @@ defmodule NouRauWeb.DocumentLive.FormComponent do
   defp save_document(socket, :new, document_params) do
     document = put_document_file(socket, %Document{})
 
-    case Collections.create_document_from(document, document_params, &consume_files(socket, &1)) do
+    case Collections.create_document_from(document, document_params, &consume_attachments(socket, &1)) do
       {:ok, _document} ->
         {:noreply,
          socket
@@ -60,14 +60,15 @@ defmodule NouRauWeb.DocumentLive.FormComponent do
   end
 
   defp put_document_file(socket, %Document{} = document) do
-    {[entry|_], []} = uploaded_entries(socket, :file)
+    {[entry|_], []} = uploaded_entries(socket, :attachment)
     file_path = Routes.static_path(socket, "/uploads/" <> Upload.filename(entry))
+    attachment = %Attachment{file_path: file_path, original_filename: "hardcoded.txt"}
 
-    %Document{document | file: file_path}
+    %Document{document | attachment: attachment}
   end
 
-  defp consume_files(socket, %Document{} = document) do
-    consume_uploaded_entries(socket, :file, &Upload.new_entry/2)
+  defp consume_attachments(socket, %Document{} = document) do
+    consume_uploaded_entries(socket, :attachment, &Upload.new_entry/2)
     {:ok, document}
   end
 end

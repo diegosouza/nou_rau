@@ -27,6 +27,18 @@
       <%= @document.category.name %>
   </li>
 
+  <%= if @document.attachment do %>
+    <li>
+        <strong>File:</strong>
+        <%= @document.attachment.original_filename %>
+    </li>
+  <% else %>
+    <li>
+        <strong>File:</strong>
+        No attachment yet
+    </li>
+  <% end %>
+
   <li>
     <strong>Inserted at:</strong>
     <%= @document.inserted_at %>

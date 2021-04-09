@@ -19,16 +19,22 @@
   <%= error_tag f, :category_id %>
 
   <div>
-    <%= label f, :file %>
-    <%= live_file_input @uploads.file %>
+    <%= if @document.attachment do %>
+      <a href="#"><%= @document.attachment.original_filename %></a>
 
-    <%= for file <- @uploads.file.entries do %>
-      <span class="column">
-          <progress max="100" value="<%= file.progress %>" />
-      </span>
-    <% end %>
+    <% else %>
+      <%= label f, :file %>
+      <%= live_file_input @uploads.attachment %>
 
-    <%= for {_ref, msg} <- @uploads.file.errors do %>
+      <%= for attachment <- @uploads.attachment.entries do %>
+        <span class="column">
+            <progress max="100" value="<%= attachment.progress %>" />
+        </span>
+      <% end %>
+
+    <%= end %>
+
+    <%= for {_ref, msg} <- @uploads.attachment.errors do %>
       <p class="alert alert-danger">
           <%= Phoenix.Naming.humanize(msg) %>
       </p>
